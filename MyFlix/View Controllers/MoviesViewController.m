@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSArray *movies;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation MoviesViewController
@@ -23,18 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+    [self.activityIndicator startAnimating];
+    //NSLog(@"before fetch");
     [self fetchMovies];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     [self.tableView addSubview:self.refreshControl];
+    //NSLog(@"end of viewDidLoad");
+   
 }
 
 - (void) fetchMovies{
+    //NSLog(@"fetch called");
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
@@ -45,19 +53,22 @@
            else {
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                
-               NSLog(@"%@", dataDictionary);
+               //NSLog(@"%@", dataDictionary);
                // TODO: Get the array of movies
                self.movies = dataDictionary[@"results"];
-               for(NSDictionary *movie in self.movies){
-                   NSLog(@"%@", movie[@"title"]);
-               }
+//               for(NSDictionary *movie in self.movies){
+//                   NSLog(@"%@", movie[@"title"]);
+//               }
                
                [self.tableView reloadData];
                // TODO: Store the movies in a property to use elsewhere
                // TODO: Reload your table view data
            }
         [self.refreshControl endRefreshing];
+        [self.activityIndicator stopAnimating];
+        //NSLog(@"complete");
        }];
+    
     [task resume];
 }
 
@@ -82,7 +93,7 @@
     
     cell.posterView.image = nil;
     [cell.posterView setImageWithURL:posterURL];
-    
+
    // cell.textLabel.text = movie[@"title"];
     
     return cell;

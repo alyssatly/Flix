@@ -8,6 +8,7 @@ target 'MyFlix' do
   # Pods for MyFlix
 	
   pod 'AFNetworking'
+pod 'SVProgressHUD', :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
 
   target 'MyFlixTests' do
     inherit! :search_paths
