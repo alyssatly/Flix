@@ -27,21 +27,37 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     //Do any additional setup after loading the view.
+    self.titleLabel.alpha = 0.0;
+    self.synopsisLabel.alpha = 0.0;
+    self.titleLabel.text = self.movie[@"title"];
+    self.synopsisLabel.text = self.movie[@"overview"];
+    
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = self.movie[@"poster_path"];
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     
     NSURL*posterURL = [NSURL URLWithString:fullPosterURLString];
+    self.posterView.alpha = 0.0;
     [self.posterView setImageWithURL:posterURL];
     
     NSString *backdropURLString = self.movie[@"backdrop_path"];
     NSString *fullBackdropURLString = [baseURLString stringByAppendingString:backdropURLString];
     
     NSURL *backdropURL = [NSURL URLWithString:fullBackdropURLString];
+    self.backdropView.alpha = 0.0;
     [self.backdropView setImageWithURL:backdropURL];
     
-    self.titleLabel.text = self.movie[@"title"];
-    self.synopsisLabel.text = self.movie[@"overview"];
+    
+    
+    
+    //Animate UIImageView back to alpha 1 over 0.3sec
+    [UIView animateWithDuration:1.0 animations:^{
+        self.posterView.alpha = 1.0;
+        self.backdropView.alpha = 1.0;
+        self.titleLabel.alpha = 1.0;
+        self.synopsisLabel.alpha = 1.0;
+    }];
+    
     
     [self.titleLabel sizeToFit];
     [self.synopsisLabel sizeToFit];
