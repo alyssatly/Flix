@@ -20,9 +20,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="ODa-vq-L9O">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="151" id="hZ1-MS-QhH" customClass="MovieCell">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="151"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="151"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hZ1-MS-QhH" id="GEc-NR-Som">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="151"/>
@@ -70,6 +75,7 @@
                     <navigationItem key="navigationItem" title="Now Playing" id="Laj-oy-OkK"/>
                     <connections>
                         <outlet property="activityIndicator" destination="PYH-48-8Au" id="o3C-Gf-DiQ"/>
+                        <outlet property="searchBar" destination="ODa-vq-L9O" id="cDn-NF-BG0"/>
                         <outlet property="tableView" destination="4Xa-ju-gyA" id="Jlo-2D-UG6"/>
                     </connections>
                 </viewController>
