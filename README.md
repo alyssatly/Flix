@@ -20,11 +20,7 @@ The following **optional** features are implemented:
 
 - [X] User can tap a poster in the collection view to see a detail screen of that movie
 - [X] User can search for a movie.
-<<<<<<< HEAD
-- [ ] All images fade in as they are loading.
-=======
-- [ ] All images fade in as they are loading.
->>>>>>> 153883fb93b6c883eda96c32c118baa0a2507d8a
+- [X] All images fade in as they are loading.
 - [ ] User can view the large movie poster by tapping on a cell.
 - [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete.
 - [ ] Customize the selection effect of the cell.
@@ -37,15 +33,22 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. I want to discuss more about the search bar, I want to see if there is a better way to implement it or how I could maybe expand on it so that it can search all movies instead of just movies on a certain page. 
+1. I want to discuss more about the search bar, I want to see if there is a better way to implement it or how I could maybe expand on it so that it can search all movies instead of just movies on a certain page. Also want to know how to add a search bar for grid views. 
 2. I'm interested on how to put a table view and collection view together so that you could have a similar movies at the bottom. 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
+Users can view list of movies, detailed view and search:
 <img src='http://g.recordit.co/VFVOHy7r71.gif' title='Users can view list of movies, detailed view and search' width='' alt='Video Walkthrough' />
+
+Users can view grid view and view detailed view:
 <img src='http://g.recordit.co/yfCH7Irh6z.gif' title='Users can view grid view and view detailed view' width='' alt='Video Walkthrough' />
+
+Images and text fade in:
+<img src='http://g.recordit.co/YBlwnqrJDE.gif' title='Images and text fade in' width='' alt='Video Walkthrough' />
+
 
 GIF created with https://recordit.co/
 
@@ -53,8 +56,7 @@ GIF created with https://recordit.co/
 
 Describe any challenges encountered while building the app.
 
-I faced the most challenge so far with the search bar. Since I am not too familliar with Objective C, I wasn't too sure on how to isolate the movie titles to make it so that you can search by title. 
-I was able to figure it out by getting help from the internet. 
+I faced the most challenge so far with the search bar. Since I am not too familliar with Objective C, I wasn't too sure on how to isolate the movie titles to make it so that you can search by title.I was able to figure it out by getting help from the internet. However, I tried to implement a search bar in the grid view but couldn't figure out how to solve it. 
 I also faced issues with the loading screen because I wasn't aware of how things ran concurrently with each other. 
 
 ## Credits
