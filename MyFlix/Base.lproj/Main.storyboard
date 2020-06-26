@@ -149,11 +149,11 @@
             </objects>
             <point key="canvasLocation" x="1219" y="-678"/>
         </scene>
-        <!--Item-->
+        <!--Trending -->
         <scene sceneID="fKi-aa-bvV">
             <objects>
                 <navigationController id="F0a-9s-ogm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="tOf-ZL-SOI"/>
+                    <tabBarItem key="tabBarItem" title="Trending " image="projector_tabbar_item" id="tOf-ZL-SOI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TpH-4H-8vi">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -166,7 +166,7 @@
             </objects>
             <point key="canvasLocation" x="2057" y="44"/>
         </scene>
-        <!--Movies Grid View Controller-->
+        <!--Trending Now-->
         <scene sceneID="dHp-1a-nM2">
             <objects>
                 <viewController id="rHm-dh-kds" customClass="MoviesGridViewController" sceneMemberID="viewController">
@@ -180,6 +180,11 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="Shc-8w-TnQ">
+                            <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionCell" id="qPm-AK-kvw" customClass="MovieCollectionCell">
                                 <rect key="frame" x="0.0" y="0.0" width="170" height="244"/>
@@ -201,8 +206,9 @@
                             </collectionViewCell>
                         </cells>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="nHN-iy-ken"/>
+                    <navigationItem key="navigationItem" title="Trending Now" id="nHN-iy-ken"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Shc-8w-TnQ" id="P7f-bD-rAN"/>
                         <outlet property="collectionView" destination="Z6d-Gs-zsF" id="G8n-Cb-fu3"/>
                     </connections>
                 </viewController>
@@ -214,7 +220,7 @@
         <scene sceneID="3WA-5N-wn8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cuX-gE-OZv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Now Playing" id="P2V-Bv-fMO"/>
+                    <tabBarItem key="tabBarItem" title="Now Playing" image="now_playing_tabbar_item" id="P2V-Bv-fMO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rDc-1R-c2Q">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -230,4 +236,8 @@
             <point key="canvasLocation" x="358" y="44"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="now_playing_tabbar_item" width="21" height="21"/>
+        <image name="projector_tabbar_item" width="21" height="25"/>
+    </resources>
 </document>

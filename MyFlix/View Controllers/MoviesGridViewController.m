@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSArray *movies;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -24,7 +25,7 @@
     // Do any additional setup after loading the view.
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    
+    [self.activityIndicator startAnimating];
     [self fetchMovies];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
@@ -40,30 +41,30 @@
 
 - (void) fetchMovies{
     //NSLog(@"fetch called");
-    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
+    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
                NSLog(@"%@", [error localizedDescription]);
-               //add loading thing again later
-//               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
-//                      message:@"The Internet Connection Appears to be offline"
-//               preferredStyle:(UIAlertControllerStyleAlert)];
-//
-//               UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again"
-//                                                                   style:UIAlertActionStyleCancel
-//                                                                 handler:^(UIAlertAction * _Nonnull action) {
-//                                                                        [self.activityIndicator startAnimating];
-//                                                                        [self fetchMovies];
-//
-//                                                                 }];
-//               // add the try again action to the alertController
-//               [alert addAction:tryAgainAction];
-//
-//               [self presentViewController:alert animated:YES completion:^{
-//                   // optional code for what happens after the alert controller has finished presenting
-//               }];
+              
+               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
+                      message:@"The Internet Connection Appears to be offline"
+               preferredStyle:(UIAlertControllerStyleAlert)];
+
+               UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                        [self.activityIndicator startAnimating];
+                                                                        [self fetchMovies];
+
+                                                                 }];
+               // add the try again action to the alertController
+               [alert addAction:tryAgainAction];
+
+               [self presentViewController:alert animated:YES completion:^{
+                   // optional code for what happens after the alert controller has finished presenting
+               }];
 
                
            }
@@ -79,6 +80,7 @@
                [self.collectionView reloadData];
            }
         //NSLog(@"complete");
+        [self.activityIndicator stopAnimating];
        }];
     
     [task resume];
