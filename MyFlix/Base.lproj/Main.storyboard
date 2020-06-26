@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Now Playing-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" sceneMemberID="viewController">
@@ -67,7 +67,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="Laj-oy-OkK"/>
+                    <navigationItem key="navigationItem" title="Now Playing" id="Laj-oy-OkK"/>
                     <connections>
                         <outlet property="activityIndicator" destination="PYH-48-8Au" id="o3C-Gf-DiQ"/>
                         <outlet property="tableView" destination="4Xa-ju-gyA" id="Jlo-2D-UG6"/>
@@ -129,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RYo-Ot-Ack" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358" y="1426"/>
+            <point key="canvasLocation" x="1307" y="1576"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gjr-bI-KYn">
@@ -202,6 +202,7 @@
                                 <size key="customSize" width="170" height="244"/>
                                 <connections>
                                     <outlet property="posterView" destination="Zxg-ey-qXg" id="6g1-0e-ib0"/>
+                                    <segue destination="U2a-Fd-bvx" kind="show" id="rIj-KT-thP"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -236,6 +237,9 @@
             <point key="canvasLocation" x="358" y="44"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="rIj-KT-thP"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="now_playing_tabbar_item" width="21" height="21"/>
         <image name="projector_tabbar_item" width="21" height="25"/>
