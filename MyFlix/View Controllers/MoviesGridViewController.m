@@ -11,11 +11,14 @@
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
 
-@interface MoviesGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface MoviesGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSArray *movies;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+//@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+//@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+
+//@property (strong, nonatomic) NSArray *filteredData;
 
 @end
 
@@ -26,7 +29,8 @@
     // Do any additional setup after loading the view.
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    [self.activityIndicator startAnimating];
+    //self.searchBar.delegate = self;
+    //[self.activityIndicator startAnimating];
     [self fetchMovies];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
@@ -56,7 +60,7 @@
                UIAlertAction *tryAgainAction = [UIAlertAction actionWithTitle:@"Try Again"
                                                                    style:UIAlertActionStyleCancel
                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                        [self.activityIndicator startAnimating];
+                                                                        //[self.activityIndicator startAnimating];
                                                                         [self fetchMovies];
 
                                                                  }];
@@ -74,14 +78,14 @@
        
                // TODO: Get the array of movies
                self.movies = dataDictionary[@"results"];
-
+               //self.filteredData = self.movies;
                
                // TODO: Store the movies in a property to use elsewhere
                // TODO: Reload your table view data
                [self.collectionView reloadData];
            }
         //NSLog(@"complete");
-        [self.activityIndicator stopAnimating];
+        //[self.activityIndicator stopAnimating];
        }];
     
     [task resume];
@@ -115,8 +119,14 @@
     
     NSURL*posterURL = [NSURL URLWithString:fullPosterURLString];
     
-    cell.posterView.image = nil; 
+    cell.posterView.image = nil;
+    cell.posterView.alpha = 0.0;
     [cell.posterView setImageWithURL:posterURL];
+    
+    //Animate UIImageView back to alpha 1 over 0.3sec
+    [UIView animateWithDuration:1.0 animations:^{
+        cell.posterView.alpha = 1.0;
+    }];
     
     return cell;
 }
@@ -125,5 +135,40 @@
     return self.movies.count;
 }
 
+/*
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+
+    if (searchText.length != 0) {
+        self.filteredData = [self.movies filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(title contains[c] %@)", searchText]];
+//        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
+//            return [evaluatedObject containsString:searchText];
+//        }];
+//        self.filteredData = [self.movie filteredArrayUsingPredicate:predicate];
+
+        NSLog(@"%@", self.filteredData);
+
+    }
+    else {
+        self.filteredData = self.movies;
+    }
+
+    [self.collectionView reloadData];
+
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    
+    [self.searchBar resignFirstResponder];
+    self.filteredData = self.movies;
+    [self.collectionView reloadData];
+    
+}
+*/
 
 @end

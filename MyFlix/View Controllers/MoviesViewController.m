@@ -115,6 +115,8 @@
     
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
+    cell.titleLabel.alpha = 0.0;
+    cell.synopsisLabel.alpha = 0.0;
     
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = movie[@"poster_path"];
@@ -123,7 +125,16 @@
     NSURL*posterURL = [NSURL URLWithString:fullPosterURLString];
     
     cell.posterView.image = nil;
+    cell.posterView.alpha = 0.0;
     [cell.posterView setImageWithURL:posterURL];
+    
+    //Animate UIImageView back to alpha 1 over 0.3sec
+    [UIView animateWithDuration:1.0 animations:^{
+        cell.posterView.alpha = 1.0;
+        cell.titleLabel.alpha = 1.0;
+        cell.synopsisLabel.alpha = 1.0;
+    }];
+    
 
    // cell.textLabel.text = movie[@"title"];
     
